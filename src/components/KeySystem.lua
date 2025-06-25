@@ -205,7 +205,7 @@ function KeySystem.new(Config, Filename, func)
     end
     
     if Config.KeySystem.URL then
-        CreateButton("Get key", "key", function()
+        CreateButton("Get Key", "key", function()
             setclipboard(Config.KeySystem.URL)
         end, "Secondary", ButtonsContainer.Frame)
     end
@@ -213,7 +213,7 @@ function KeySystem.new(Config, Filename, func)
     local UQ = Config.KeySystem.ENBS
     getgenv()[UQ]
     
-    local SubmitButton = CreateButton("Submit", "arrow-right", function()
+    local SubmitButton = CreateButton("Check Key", "arrow-right", function()
         local KeySubmit = EnteredKey
         if type(Config.KeySystem.Key) == "table" then
             getgenv()[UQ] = table.find(Config.KeySystem.Key, tostring(KeySubmit))
@@ -222,7 +222,7 @@ function KeySystem.new(Config, Filename, func)
         end
 
         if type(Config.KeySystem.Key) == "function" then
-           Config.KeySystem.Key(KeySubmit)
+           Config.KeySystem.Key(KeySubmit, InputFrame)
         end
 
         if getgenv()[UQ] == true and type(Config.KeySystem.Key) == "function" then
