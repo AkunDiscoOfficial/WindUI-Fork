@@ -226,7 +226,7 @@ function KeySystem.new(Config, Filename, func)
         end
 
         if type(Config.KeySystem.Key) == "function" then
-           Config.KeySystem.Key(KeySubmit)
+           Config.KeySystem.Key(KeySubmit, func)
         end
 
         if getgenv()[UQ] == true and type(Config.KeySystem.Key) == "function" then
