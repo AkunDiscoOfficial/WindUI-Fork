@@ -210,23 +210,35 @@ function KeySystem.new(Config, Filename, func)
             setclipboard(Config.KeySystem.URL)
         end, "Secondary", ButtonsContainer.Frame)
     end
+
+    local UQ = Config.KeySystem.ENBS
+    getgenv()[UQ]
     
     local SubmitButton = CreateButton("Submit", "arrow-right", function()
         local KeySubmit = EnteredKey
-        getgenv().
         if type(Config.KeySystem.Key) == "table" then
-            isKey = table.find(Config.KeySystem.Key, tostring(KeySubmit))
+            getgenv()[UQ] = table.find(Config.KeySystem.Key, tostring(KeySubmit))
         else
-            isKey = tostring(Config.KeySystem.Key) == tostring(KeySubmit)
+            getgenv()[UQ] = tostring(Config.KeySystem.Key) == tostring(KeySubmit)
         end
 
         if type(Config.KeySystem.Key) == "function" then
-            Config.KeySystem.Key(KeySubmit)
+           Config.KeySystem.Key(KeySubmit)
         end
 
-        if isKey
+        if getgenv()[UQ] == true and type(Config.KeySystem.Key) == "function" then
+           KeyDialog:Close()()
+            
+            if Config.KeySystem.SaveKey then
+                local folder = Config.Folder or Config.Title
+                writefile(folder .. "/" .. Filename .. ".key", tostring(Key))
+            end
+            
+            task.wait(.4)
+            func(true)
+        end
         
-        if isKey and type(Config.Keysystem.Key) == "table" then
+        if getgenv()[UQ] == true and type(Config.KeySystem.Key) == "table" then
             KeyDialog:Close()()
             
             if Config.KeySystem.SaveKey then
