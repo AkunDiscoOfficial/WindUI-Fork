@@ -4,7 +4,6 @@ local KeySystem = {}
 local Creator = require("../modules/Creator")
 local New = Creator.New
 local Tween = Creator.Tween
-local HttpService = cloneref(game:GetService("HttpService"))
 
 local CreateButton = require("./ui/Button").New
 local CreateInput = require("./ui/Input").New
@@ -231,7 +230,7 @@ function KeySystem.new(Config, Filename, func)
             
             if Config.KeySystem.SaveKey then
                 local folder = Config.Folder or Config.Title
-                writefile(folder .. "/" .. Filename .. ".key", tostring(Key))
+                writefile(folder .. "/" .. Filename .. ".key", tostring(KeySubmit))
             end
             
             task.wait(.4)
@@ -243,7 +242,7 @@ function KeySystem.new(Config, Filename, func)
             
             if Config.KeySystem.SaveKey then
                 local folder = Config.Folder or Config.Title
-                writefile(folder .. "/" .. Filename .. ".key", tostring(Key))
+                writefile(folder .. "/" .. Filename .. ".key", tostring(KeySubmit))
             end
             
             task.wait(.4)
