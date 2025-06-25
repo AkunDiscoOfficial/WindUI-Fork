@@ -4,6 +4,7 @@ local KeySystem = {}
 local Creator = require("../modules/Creator")
 local New = Creator.New
 local Tween = Creator.Tween
+local HttpService = cloneref(game:GetService("HttpService"))
 
 local CreateButton = require("./ui/Button").New
 local CreateInput = require("./ui/Input").New
@@ -211,15 +212,21 @@ function KeySystem.new(Config, Filename, func)
     end
     
     local SubmitButton = CreateButton("Submit", "arrow-right", function()
-        local Key = EnteredKey
-        local isKey
+        local KeySubmit = EnteredKey
+        getgenv().
         if type(Config.KeySystem.Key) == "table" then
-            isKey = table.find(Config.KeySystem.Key, tostring(Key))
+            isKey = table.find(Config.KeySystem.Key, tostring(KeySubmit))
         else
-            isKey = tostring(Config.KeySystem.Key) == tostring(Key)
+            isKey = tostring(Config.KeySystem.Key) == tostring(KeySubmit)
         end
+
+        if type(Config.KeySystem.Key) == "function" then
+            Config.KeySystem.Key(KeySubmit)
+        end
+
+        if isKey
         
-        if isKey then
+        if isKey and type(Config.Keysystem.Key) == "table" then
             KeyDialog:Close()()
             
             if Config.KeySystem.SaveKey then
