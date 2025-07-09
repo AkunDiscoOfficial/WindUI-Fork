@@ -7408,7 +7408,7 @@ Name="Window"
 }),
 
 
-getgenv().scg = aa.ScreenGui
+
 
 
 
