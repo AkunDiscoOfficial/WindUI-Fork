@@ -7423,6 +7423,8 @@ Name="ToolTips"
 })
 })
 
+getgenv().scg = aa.ScreenGui
+
 aa.NotificationGui=ae("ScreenGui",{
 Name="WindUI/Notifications",
 Parent=ai,
